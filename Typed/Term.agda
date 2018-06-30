@@ -28,10 +28,10 @@ mutual
   data _⊢_∶_ {𝔫} {Γ : Con 𝔫} (𝔾 : Γ ctx) : Tm 𝔫 → Tm 𝔫 → Set where
     𝕌 : 𝔾 ⊢ U ∶ U
 
-    ℙ𝕚 : ∀ {A B}
-      → (𝔸 : 𝔾     ⊢      A ∶ U)
-      → (𝔹 : 𝔾 , 𝔸 ⊢      B ∶ U)
-      →      𝔾     ⊢ Pi A B ∶ U
+    ℿ : ∀ {A B}
+      → (𝔸 : 𝔾     ⊢     A ∶ U)
+      → (𝔹 : 𝔾 , 𝔸 ⊢     B ∶ U)
+      →      𝔾     ⊢ Π A B ∶ U
 
     𝕋 : 𝔾 ⊢ T ∶ U
 
@@ -42,10 +42,10 @@ mutual
     𝕝𝕒𝕞 : ∀ {A B t}
       → {𝔸 : 𝔾     ⊢     A ∶ U}
       → (𝕥 : 𝔾 , 𝔸 ⊢     t ∶ B)
-      →      𝔾     ⊢ lam t ∶ Pi A B
+      →      𝔾     ⊢ lam t ∶ Π A B
 
     𝕒𝕡𝕡 : ∀ {A B t u}
-      → (𝕥 : 𝔾 ⊢       t ∶ Pi A B)
+      → (𝕥 : 𝔾 ⊢       t ∶ Π A B)
       → (𝕦 : 𝔾 ⊢       u ∶ A)
       →      𝔾 ⊢ app t u ∶ B [ u ]₁
 
@@ -70,31 +70,31 @@ mutual
       → (𝕢 : 𝔾 ⊢ t₂ ∼ t₃ ∶ A)
       →      𝔾 ⊢ t₁ ∼ t₃ ∶ A
 
-    ℙ𝕚-𝕔𝕠𝕟𝕘 : ∀ {A₁ A₂ B₁ B₂}
-      → {𝔸₁ : 𝔾      ⊢                  A₁ ∶ U}
-      → (ℍ₁ : 𝔾      ⊢       A₁ ∼       A₂ ∶ U)
-      → (ℍ₂ : 𝔾 , 𝔸₁ ⊢       B₁ ∼       B₂ ∶ U)
-      →       𝔾      ⊢ Pi A₁ B₁ ∼ Pi A₂ B₂ ∶ U
+    ℿ-𝕔𝕠𝕟𝕘 : ∀ {A₁ A₂ B₁ B₂}
+      → {𝔸₁ : 𝔾      ⊢                A₁ ∶ U}
+      → (ℍ₁ : 𝔾      ⊢      A₁ ∼      A₂ ∶ U)
+      → (ℍ₂ : 𝔾 , 𝔸₁ ⊢      B₁ ∼      B₂ ∶ U)
+      →       𝔾      ⊢ Π A₁ B₁ ∼ Π A₂ B₂ ∶ U
 
     𝕝𝕒𝕞-𝕔𝕠𝕟𝕘 : ∀ {A B t₁ t₂}
       → {𝔸 : 𝔾     ⊢               A ∶ U}
       → (𝕡 : 𝔾 , 𝔸 ⊢     t₁ ∼     t₂ ∶ B)
-      →      𝔾     ⊢ lam t₁ ∼ lam t₂ ∶ Pi A B
+      →      𝔾     ⊢ lam t₁ ∼ lam t₂ ∶ Π A B
 
     𝕒𝕡𝕡-𝕔𝕠𝕟𝕘 : ∀ {A B t₁ t₂ u₁ u₂}
-      → (𝕡 : 𝔾 ⊢        t₁ ∼        t₂ ∶ Pi A B)
+      → (𝕡 : 𝔾 ⊢        t₁ ∼        t₂ ∶ Π A B)
       → (𝕢 : 𝔾 ⊢        u₁ ∼        u₂ ∶ A)
       →      𝔾 ⊢ app t₁ u₁ ∼ app t₂ u₂ ∶ B [ t₁ ]₁
 
-    ℙ𝕚-𝕓𝕖𝕥𝕒 : ∀ {A B t u}
+    ℿ-𝕓𝕖𝕥𝕒 : ∀ {A B t u}
       → {𝔸 : 𝔾     ⊢                        A ∶ U}
       → (𝕥 : 𝔾 , 𝔸 ⊢                        t ∶ B)
       → (𝕦 : 𝔾     ⊢                        u ∶ A)
       →      𝔾     ⊢ app (lam t) u ∼ t [ u ]₁ ∶ B [ u ]₁
 
-    ℙ𝕚-𝕖𝕥𝕒 : ∀ {A B t}
-      → (𝕥 : 𝔾 ⊢                                t ∶ Pi A B)
-      →      𝔾 ⊢ t ∼ lam (app (t [↑]) (var zero)) ∶ Pi A B
+    ℿ-𝕖𝕥𝕒 : ∀ {A B t}
+      → (𝕥 : 𝔾 ⊢                                t ∶ Π A B)
+      →      𝔾 ⊢ t ∼ lam (app (t [↑]) (var zero)) ∶ Π A B
 
     _≫_ : ∀ {A B t₁ t₂}
       → (𝕡 : 𝔾 ⊢ t₁ ∼ t₂ ∶ A)

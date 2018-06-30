@@ -32,7 +32,7 @@ ren∋ (keep 𝓌) (suc x) = suc (ren∋ 𝓌 x)
 
 ren⊢ : ∀ {𝔪 𝔫} → Ren 𝔪 𝔫 → Tm 𝔫 → Tm 𝔪
 ren⊢ 𝓌 (U)       = U
-ren⊢ 𝓌 (Pi A B)  = Pi (ren⊢ 𝓌 A) (ren⊢ (keep 𝓌) B)
+ren⊢ 𝓌 (Π A B)   = Π (ren⊢ 𝓌 A) (ren⊢ (keep 𝓌) B)
 ren⊢ 𝓌 (T)       = T
 ren⊢ 𝓌 (var x)   = var (ren∋ 𝓌 x)
 ren⊢ 𝓌 (lam t)   = lam (ren⊢ (keep 𝓌) t)

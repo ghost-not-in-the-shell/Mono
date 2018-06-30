@@ -8,9 +8,9 @@ data Var : Nat → Set where
   suc  : ∀ {𝔫} → Var 𝔫 → Var (suc 𝔫)
 
 data Tm (𝔫 : Nat) : Set where
-  U  : Tm 𝔫
-  Pi : (A : Tm 𝔫) (B : Tm (suc 𝔫)) → Tm 𝔫
-  T  : Tm 𝔫
+  U : Tm 𝔫
+  Π : (A : Tm 𝔫) (B : Tm (suc 𝔫)) → Tm 𝔫
+  T : Tm 𝔫
 
   var : (x : Var 𝔫) → Tm 𝔫
   lam : (t : Tm (suc 𝔫)) → Tm 𝔫
